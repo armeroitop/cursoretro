@@ -1,12 +1,15 @@
-extern "C" {    
-    #include "tinyPTC/tinyptc.h"
+extern "C"
+{
+#include "tinyPTC/tinyptc.h"
 }
 
-int main(){
-   /*  ptc_open("windows", 640, 360);
-    for(;;);
+int main()
+{
+    ptc_open("windows", 640, 360);
+    for (;;)
+        ;
 
-    ptc_close(); */
+    ptc_close();
 
     return 0;
 }

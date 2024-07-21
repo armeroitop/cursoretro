@@ -15,7 +15,7 @@ OBJSUBDIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
 ALLC		:= $(shell find src/ -type f -iname *.c)
 ALLCSOBJ	:= $(patsubst %.c,%.o,$(ALLC))
 
-ALLCCP		:= $(shell find src/ -type f -iname *.cpp)
+ALLCPP		:= $(shell find src/ -type f -iname *.cpp)
 ALLCPPSOBJ	:= $(patsubst %.cpp,%.o,$(ALLCPP))
 
 .PHONY: dir
@@ -23,12 +23,11 @@ ALLCPPSOBJ	:= $(patsubst %.cpp,%.o,$(ALLCPP))
 
 $(APP) : $(OBJSUBDIRS) $(ALLCPPSOBJ) $(ALLCSOBJ) 
 	$(CC) -o $(APP) $(patsubst $(SRC)%,$(OBJ)%,$(ALLCPPSOBJ) $(ALLCSOBJ)) $(LIBS)
-
+%.o : %.cpp
+	$(CC) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CCFLAGS)
 %.o : %.c
 	$(C) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CFLAGS)
 
-%.o : %.cpp
-	$(CC) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CCFLAGS)
 
 dir :
 	$(info $(SUBDIRS))
