@@ -1,5 +1,5 @@
 extern "C" {
-#include "tinyPTC/tinyptc.h"
+#include <tinyPTC/src/tinyptc.h>
 }
 #define COLOR_ROJO 0x00FF0000;
 #define COLOR_AZUL 0x000000FF;
