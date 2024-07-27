@@ -1,13 +1,24 @@
 .PHONY: all clean cleanall
 
+ROOT_DIR := .
+
+DIRS := $(shell find $(ROOT_DIR) -maxdepth 1 -type d -not -path $(ROOT_DIR))
+
 all:
-	$(MAKE) -C tinyPTC
-	$(MAKE) -C picoPNG
+	$(foreach dir, $(DIRS),$(MAKE) -C $(dir);)
 
 clean:
-	$(MAKE) -C picoPNG clean
-	$(MAKE) -C tinyPTC clean
+	$(foreach dir, $(DIRS),$(MAKE) -C $(dir) clean;)
 
 cleanall:
-	$(MAKE) -C picoPNG cleanall
-	$(MAKE) -C tinyPTC cleanall
+	$(foreach dir, $(DIRS),$(MAKE) -C $(dir) cleanall;)
+
+
+#$(MAKE) -C tinyPTC
+#$(MAKE) -C picoPNG
+
+#$(MAKE) -C picoPNG clean
+#$(MAKE) -C tinyPTC clean
+
+#$(MAKE) -C picoPNG cleanall
+#$(MAKE) -C tinyPTC cleanall

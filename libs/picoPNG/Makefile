@@ -39,6 +39,7 @@ RANLIB	:= ranlib
 MKDIR	:= mkdir -p
 SRC		:= src
 OBJ		:= obj
+RM		:= rm
 
 
 ifdef DEBUG
@@ -89,7 +90,7 @@ info :
 	$(info $(ALLOBJ))
 
 clean:
-	rm -f /obj/*.o
+	$(RM) -r ./$(OBJ)
 
-cleanall:
-	rm -rf "./obj"
+cleanall: clean
+	$(RM)  "./$(APP)"

@@ -39,12 +39,13 @@ RANLIB	:= ranlib
 MKDIR	:= mkdir -p
 SRC		:= src
 OBJ		:= obj
-
+RM		:= rm
 
 ifdef DEBUG
 	CCFLAGS += -g
 else
 	CCFLAGS += -O3
+	CFLAGS	+= -O3
 endif
 
 SUBDIRS		:= $(shell find $(SRC) -type d)
@@ -89,7 +90,7 @@ info :
 	$(info $(ALLOBJ))
 
 clean:
-	rm -f ./obj/*.o
+	$(RM) -r ./$(OBJ)
 
-cleanall:
-	rm -rf "./obj"
+cleanall: clean
+	$(RM) -f ./$(APP)

@@ -29,8 +29,8 @@ endef
 ##########################################
 
 APP		:= game
-CC_FLAGS	:= -Wall -pedantic
-C_FLAGS	:= $(CC_FLAGS)
+C_FLAGS	:= -Wall -pedantic -std=c++17
+CC_FLAGS:= $(C_FLAGS)
 CC		:= g++
 C		:= gcc
 MKDIR	:= mkdir -p
@@ -39,6 +39,7 @@ OBJ		:= obj
 LIBS_DIR	:= libs
 LIBS 	:= $(LIBS_DIR)/picoPNG/libpicopng.a  $(LIBS_DIR)/tinyPTC/libtinyptc.a -lX11 -lXext 
 INC_DIRS := -I$(SRC) -I$(LIBS_DIR)
+RM 		:= rm
 
 ifdef DEBUG
 	CC_FLAGS += -g
@@ -59,7 +60,7 @@ ALL_CPP		:= $(shell find src/ -type f -iname *.cpp)
 
 ALL_OBJ		:= $(foreach F,$(ALL_C) $(ALL_CPP),$(call CTO,$(F)))
 
-.PHONY: info clean cleanall
+.PHONY: info clean cleanall libs libs-clean libs-cleanall
 
 
 #Linkador
@@ -87,8 +88,18 @@ info :
 	$(info $(ALL_OBJ))
 
 clean:
-	rm -rf ./obj/*.o
+	$(RM) -r ./$(OBJ)
 
-cleanall:
-	rm -rf "./obj"
+cleanall: clean
+	$(RM) "./$(APP)"
 
+
+# LIBS Rules
+libs:
+	$(MAKE) -C $(LIBS_DIR)
+
+libs-clean:
+	$(MAKE) -C $(LIBS_DIR) clean
+
+libs-cleanall:
+	$(MAKE) -C $(LIBS_DIR) cleanall
