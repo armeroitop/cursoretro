@@ -5,7 +5,7 @@
 
 # $(1) : Compilador
 # $(2) : Objeto file a generar
-# $(3) : Codigo fuente
+# $(3) : Codigo fuenteALL_C
 # $(4) : Dependencias adicionales
 # $(5) : Flags del compilador
 define COMPILA
@@ -29,60 +29,66 @@ endef
 ##########################################
 
 APP		:= game
-CCFLAGS	:= -Wall -pedantic
-CFLAGS	:= $(CCFLAGS)
+CC_FLAGS	:= -Wall -pedantic
+C_FLAGS	:= $(CC_FLAGS)
 CC		:= g++
 C		:= gcc
 MKDIR	:= mkdir -p
 SRC		:= src
 OBJ		:= obj
-LIBSDIR	:= libs
-LIBS 	:= $(LIBSDIR)/picoPNG/libpicopng.a  $(LIBSDIR)/tinyPTC/libtinyptc.a -lX11 -lXext 
-INCDIRS := -I$(SRC) -I$(LIBSDIR)
+LIBS_DIR	:= libs
+LIBS 	:= $(LIBS_DIR)/picoPNG/libpicopng.a  $(LIBS_DIR)/tinyPTC/libtinyptc.a -lX11 -lXext 
+INC_DIRS := -I$(SRC) -I$(LIBS_DIR)
 
 ifdef DEBUG
-	CCFLAGS += -g
+	CC_FLAGS += -g
 else
-	CCFLAGS += -O3
+	CC_FLAGS += -O3
 endif
 
-SUBDIRS		:= $(shell find $(SRC) -type d)
-OBJSUBDIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
+SUB_DIRS		:= $(shell find $(SRC) -type d)
+OBJSUB_DIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUB_DIRS))
 
-ALLC		:= $(shell find src/ -type f -iname *.c)
-#ALLCSOBJ	:= $(patsubst %.c,%.o,$(ALLC))
-#ALLCSOBJ	:= $(foreach F,$(ALLC),$(call CTO,$(F)))
+ALL_C		:= $(shell find src/ -type f -iname *.c)
+#ALL_CSOBJ	:= $(patsubst %.c,%.o,$(ALL_C))
+#ALL_CSOBJ	:= $(foreach F,$(ALL_C),$(call CTO,$(F)))
 
-ALLCPP		:= $(shell find src/ -type f -iname *.cpp)
-#ALLCPPSOBJ	:= $(patsubst %.cpp,%.o,$(ALLCPP))
-#ALLCPPSOBJ	:= $(foreach F,$(ALLCPP),$(call CTO,$(F)))
+ALL_CPP		:= $(shell find src/ -type f -iname *.cpp)
+#ALL_CPPSOBJ	:= $(patsubst %.cpp,%.o,$(ALL_CPP))
+#ALL_CPPSOBJ	:= $(foreach F,$(ALL_CPP),$(call CTO,$(F)))
 
-ALLOBJ		:= $(foreach F,$(ALLC) $(ALLCPP),$(call CTO,$(F)))
+ALL_OBJ		:= $(foreach F,$(ALL_C) $(ALL_CPP),$(call CTO,$(F)))
 
-.PHONY: info
+.PHONY: info clean cleanall
 
 
 #Linkador
-$(APP) : $(OBJSUBDIRS) $(ALLOBJ) 
-	$(CC) -o $(APP) $(ALLOBJ) $(LIBS)
+$(APP) : $(OBJSUB_DIRS) $(ALL_OBJ) 
+	$(CC) -o $(APP) $(ALL_OBJ) $(LIBS)
 
 #Genera las reglas para los objetos
-$(foreach F,$(ALLCPP),$(eval $(call COMPILA,$(CC),$(call CTO,$(F)),$(F),$(call CTH,$(F)),$(CCFLAGS) $(INCDIRS)))) 
+$(foreach F,$(ALL_CPP),$(eval $(call COMPILA,$(CC),$(call CTO,$(F)),$(F),$(call CTH,$(F)),$(CC_FLAGS) $(INC_DIRS)))) 
 
-$(foreach F,$(ALLC),$(eval $(call COMPILA,$(C),$(call CTO,$(F)),$(F),$(call CTH,$(F)),$(CFLAGS) $(INCDIRS)))) 
+$(foreach F,$(ALL_C),$(eval $(call COMPILA,$(C),$(call CTO,$(F)),$(F),$(call CTH,$(F)),$(C_FLAGS) $(INC_DIRS)))) 
 
 #$(OBJ)/%.o : $(SRC)/%.cpp
-#	$(CC) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CCFLAGS)
+#	$(CC) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CC_FLAGS)
 #$(OBJ)/%.o : $(SRC)/%.c
-#	$(C) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CFLAGS)
+#	$(C) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(C_FLAGS)
 
+$(OBJSUB_DIRS) :
+	$(MKDIR) $(OBJSUB_DIRS)
 
 info :
-	$(info $(SUBDIRS))
-	$(info $(OBJSUBDIRS))
-	$(info $(ALLCPP))
-	$(info $(ALLC))
-	$(info $(ALLOBJ))
+	$(info $(SUB_DIRS))
+	$(info $(OBJSUB_DIRS))
+	$(info $(ALL_CPP))
+	$(info $(ALL_C))
+	$(info $(ALL_OBJ))
 
-$(OBJSUBDIRS) :
-	$(MKDIR) $(OBJSUBDIRS)
+clean:
+	rm -rf ./obj/*.o
+
+cleanall:
+	rm -rf "./obj"
+

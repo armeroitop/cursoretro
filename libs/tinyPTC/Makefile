@@ -60,7 +60,7 @@ ALLCPP		:= $(shell find src/ -type f -iname *.cpp)
 
 ALLOBJ		:= $(foreach F,$(ALLC) $(ALLCPP),$(call CTO,$(F)))
 
-.PHONY: info
+.PHONY: info clean cleanall
 
 
 #Genera la libreria
@@ -78,6 +78,8 @@ $(foreach F,$(ALLC),$(eval $(call COMPILA,$(C),$(call CTO,$(F)),$(F),$(call CTH,
 #$(OBJ)/%.o : $(SRC)/%.c
 #	$(C) -o $(patsubst $(SRC)%,$(OBJ)%,$@) -c $^ $(CFLAGS)
 
+$(OBJSUBDIRS) :
+	$(MKDIR) $(OBJSUBDIRS)
 
 info :
 	$(info $(SUBDIRS))
@@ -86,5 +88,8 @@ info :
 	$(info $(ALLC))
 	$(info $(ALLOBJ))
 
-$(OBJSUBDIRS) :
-	$(MKDIR) $(OBJSUBDIRS)
+clean:
+	rm -f ./obj/*.o
+
+cleanall:
+	rm -rf "./obj"

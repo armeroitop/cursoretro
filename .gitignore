@@ -1,0 +1,7 @@
+# Ignorar archivos y directorios temporales de compilación
+**/obj/
+
+# Ignorar archivos binarios y ejecutables
+**/*.exe
+**/*.dll
+**/*.so
