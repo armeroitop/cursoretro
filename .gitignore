@@ -9,3 +9,5 @@ game
 
 # Ignorar archivos estáticos de bibliotecas (.a)
 **/*.a
+
+./vscode
