@@ -6,6 +6,7 @@ extern "C" {
 #include <iostream>
 #include <memory>
 #include "main.hpp"
+#include "sys/render.hpp"
 
 constexpr uint32_t KR { 0x00FF0000 };
 constexpr uint32_t KG { 0x0000FF00 };
@@ -25,9 +26,16 @@ void execute() {
 
     auto screen = std::make_unique<uint32_t []>(KSCREEN_WIDTH * KSCREEN_HEIGHT);
 
-    ptc_open("windows", KSCREEN_WIDTH, KSCREEN_HEIGHT);
+    //ptc_open("windows", KSCREEN_WIDTH, KSCREEN_HEIGHT);
+    ECS::RenderSystem_t Render{KSCREEN_WIDTH , KSCREEN_HEIGHT};
 
-    while (!ptc_process_events()) {
+    while (true)
+    {
+        /* code */
+    }
+    
+
+    /* while (!ptc_process_events()) {
         for (uint32_t i = 0; i < KSCREEN_WIDTH * KSCREEN_HEIGHT; i++) {
             screen[i] = KR;
         }
@@ -44,9 +52,9 @@ void execute() {
             p_screen += 640 - 8;
         }
 
-        ptc_update(screen.get());
-    }
-    ptc_close();
+        ptc_update(screen.get()); 
+    }*/
+    //ptc_close();
 }
 
 int main() {
