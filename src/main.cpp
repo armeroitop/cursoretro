@@ -7,13 +7,16 @@ extern "C" {
 #include <memory>
 #include "main.hpp"
 #include "sys/render.hpp"
+#include "man/entitymanager.hpp"
 
 
 int main() {
 
     try {
         //execute();
-        const ECS::RenderSystem_t Render { 640 , 360 };
+        ECS::EntityManager_t EntitiyMan;
+        EntitiyMan.createEntity(16,16, 0x0000FF00);
+        const ECS::RenderSystem_t Render { 640 , 360 , EntitiyMan};
 
         while (Render.update()) {
 

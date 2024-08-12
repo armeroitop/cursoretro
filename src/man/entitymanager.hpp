@@ -18,13 +18,17 @@ namespace ECS {
 
 
     struct EntityManager_t {
+
+        using VecEntities_t = std::vector<Entity_t>;
+
         static constexpr std::size_t kNUMINITIALENTITIES { 1000 };
         explicit EntityManager_t();
 
         void createEntity(uint32_t _w, uint32_t _h, uint32_t color);
+        const VecEntities_t& getEntities() const {return m_Entity;}
 
         private:
-        std::vector<Entity_t> m_Entity {};
+        VecEntities_t m_Entity {};
 
     };
 

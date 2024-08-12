@@ -5,9 +5,10 @@
 
 namespace ECS {
 
+    struct EntityManager_t; //Forward declaration
 
     struct RenderSystem_t {
-        explicit RenderSystem_t(uint32_t w, uint32_t h);
+        explicit RenderSystem_t(uint32_t w, uint32_t h, EntityManager_t& em);
         ~RenderSystem_t();
 
 
@@ -29,7 +30,7 @@ namespace ECS {
         private:
         const uint32_t m_w { 0 }, m_h { 0 };
         std::unique_ptr<uint32_t []> m_framebuffer { nullptr };
-
+        EntityManager_t& m_em;
 
     };
 

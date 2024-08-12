@@ -3,13 +3,15 @@ extern "C" {
 }
 #include "render.hpp"
 #include <memory>
+#include "man/entitymanager.hpp"
 
 namespace ECS {
 
 
-    RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h) :
+    RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h, EntityManager_t& em) :
         m_w { w }, m_h { h },
-        m_framebuffer { std::make_unique<uint32_t []>(m_w * m_h) } {
+        m_framebuffer { std::make_unique<uint32_t []>(m_w * m_h) },
+        m_em {em} {
         ptc_open("ventana", m_w, m_h);
     }
 

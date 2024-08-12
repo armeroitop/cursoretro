@@ -10,6 +10,7 @@ namespace ECS {
 
         auto& e = m_Entity.emplace_back(_w, _h);
         std::fill(begin(e.sprite), end(e.sprite), color);
+        
     }
 
 
