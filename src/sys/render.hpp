@@ -14,7 +14,7 @@ namespace ECS {
 
         bool update() const;
 
-        void pintaSprites(uint32_t*& p_screen) const;
+        void drawAllEntities() const;
 
         static constexpr uint32_t KR { 0x00FF0000 };
         static constexpr uint32_t KG { 0x0000FF00 };
