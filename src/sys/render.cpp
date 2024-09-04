@@ -37,18 +37,25 @@ namespace ECS {
 
     void RenderSystem_t::drawAllEntities() const {
         auto& entities { m_em.getEntities() };
+        auto p_screen = m_framebuffer.get();
 
-        for (auto& e : entities) {
-            auto p_screen = m_framebuffer.get();
-            p_screen += e.y * m_w + e.x;
+        auto getScreenXY = [&](uint32_t x, uint32_t y) {
+            return p_screen + y * m_w + x;
+            };
 
+
+        auto drawEntity = [&](const Entity_t& e) {
+            auto p_screen = getScreenXY(e.x, e.y);
             auto sprite_it = begin(e.sprite);
             for (uint32_t y = 0; y < e.h; y++) {
                 std::copy(sprite_it, sprite_it + e.w, p_screen);
                 sprite_it += e.w;
                 p_screen += m_w;
             }
-        }
+            };
+
+        std::for_each(begin(entities), end(entities), drawEntity);
+
     }
 
 }//fin namespace ECS
