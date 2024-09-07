@@ -5,14 +5,15 @@ extern "C" {
 #include <memory>
 #include "man/entitymanager.hpp"
 #include <algorithm>
+#include <util/gamecontext.hpp>
 
 namespace ECS {
 
 
-    RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h, EntityManager_t& em) :
+    RenderSystem_t::RenderSystem_t(uint32_t w, uint32_t h) :
         m_w { w }, m_h { h },
-        m_framebuffer { std::make_unique<uint32_t []>(m_w * m_h) },
-        m_em { em } {
+        m_framebuffer { std::make_unique<uint32_t []>(m_w * m_h) } {
+
         ptc_open("ventana", m_w, m_h);
     }
 
@@ -23,20 +24,20 @@ namespace ECS {
     /**
     * metodo upda
     */
-    bool RenderSystem_t::update() const {
+    bool RenderSystem_t::update(const GameContext_t& g) const {
         auto p_screen = m_framebuffer.get();
         const auto size = m_w * m_h;
 
         std::fill(p_screen, p_screen + size, KG);
-        drawAllEntities();
+        drawAllEntities(g.getEntities());
 
         ptc_update(p_screen);
 
         return !ptc_process_events();
     }
 
-    void RenderSystem_t::drawAllEntities() const {
-        auto& entities { m_em.getEntities() };
+    void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
+        
         auto p_screen = m_framebuffer.get();
 
         auto getScreenXY = [&](uint32_t x, uint32_t y) {

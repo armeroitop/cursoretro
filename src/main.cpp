@@ -16,9 +16,9 @@ int main() {
         //execute();
         ECS::EntityManager_t EntitiyMan;
         EntitiyMan.createEntity(20, 40, 16, 16, 0x0000FFFF);
-        const ECS::RenderSystem_t Render { 640 , 360 , EntitiyMan };
+        const ECS::RenderSystem_t Render { 640 , 360 };
 
-        while (Render.update()) {
+        while (Render.update(EntitiyMan)) {
 
         }
 
