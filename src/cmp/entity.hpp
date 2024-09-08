@@ -4,7 +4,8 @@
 #include <vector>
 #include <string>
 #include <picoPNG/src/picopng.hpp>
-#include <fstream
+#include <fstream>
+#include <cstring>
 
 namespace ECS {
 
@@ -15,20 +16,27 @@ namespace ECS {
         }
 
 
-        explicit Entity_t() {
-            std::vector<unsigned char> pixels;
-            unsigned long dx { w }, dh { h };
-            std::ifstream file(filename);
+        explicit Entity_t(std::string filename) {
+            std::vector<unsigned char> pixels {};
+            unsigned long dw { 0 }, dh { 0 };
+            std::ifstream file(filename, std::ios::binary);
 
-            decodePNG(pixels, dx, dh, in_png, size_t);
+            std::vector<unsigned char> filevec{
+                std::istreambuf_iterator<char>{file},
+                std::istreambuf_iterator<char>{}
+            };
 
-            
+            decodePNG(pixels, dw, dh, filevec.data(), filevec.size());
 
-            w = dx; h = dh;
+            // sprite = std::vector<uint32_t>{
+            //     pixels.begin(),
+            //     pixels.end()
+            // };
 
-            // int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width, 
-            //    unsigned long& image_height, const unsigned char* in_png, 
-            //    std::size_t in_size, bool convert_to_rgba32 = true);
+            sprite.resize(pixels.size()/4./);
+            std::memcpy(sprite.data(), pixels.data(),pixels.size());
+            w = dw; h = dh;
+
         }
 
 

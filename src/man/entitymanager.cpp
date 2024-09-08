@@ -8,9 +8,9 @@ namespace ECS {
 
     void EntityManager_t::createEntity(uint32_t _x, uint32_t _y, uint32_t _w, uint32_t _h, uint32_t color) {
 
-        auto& e = m_Entity.emplace_back(_w, _h);
+        auto& e = m_Entity.emplace_back("assets/player.png");
         e.x = _x; e.y = _y;
-        std::fill(begin(e.sprite), end(e.sprite), color);
+        //std::fill(begin(e.sprite), end(e.sprite), color);
 
     }
 
