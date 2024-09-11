@@ -6,7 +6,7 @@
 #include "util/gamecontext.hpp"
 
 namespace ECS {
-   
+
 
 
     struct EntityManager_t : public GameContext_t {
@@ -17,8 +17,9 @@ namespace ECS {
         explicit EntityManager_t();
 
         void createEntity(uint32_t _x, uint32_t _y, uint32_t _w, uint32_t _h, uint32_t color);
-        
-        const VecEntities_t& getEntities() const override final {return m_Entity;}
+
+        const VecEntities_t& getEntities() const override final { return m_Entity; }
+        VecEntities_t& getEntities() override final { return m_Entity; }
 
         private:
         VecEntities_t m_Entity {};

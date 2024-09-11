@@ -6,8 +6,11 @@ extern "C" {
 #include <iostream>
 #include <memory>
 #include "main.hpp"
-#include "sys/render.hpp"
-#include "man/entitymanager.hpp"
+#include <sys/physic.hpp>
+#include <sys/collision.hpp>
+#include <man/entitymanager.hpp>
+
+#include <sys/render.hpp>
 
 
 int main() {
@@ -15,10 +18,15 @@ int main() {
     try {
         //execute();
         ECS::EntityManager_t EntitiyMan;
+        ECS::PhysicSystem_t physic;
+        ECS::CollisionSystem_t collision;
+
         EntitiyMan.createEntity(20, 40, 16, 16, 0x0000FFFF);
         const ECS::RenderSystem_t Render { 640 , 360 };
 
         while (Render.update(EntitiyMan)) {
+            physic.update(EntitiyMan);
+            collision.update(EntitiyMan);
 
         }
 

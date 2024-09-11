@@ -8,13 +8,11 @@
 #include <cstring>
 
 namespace ECS {
-
     struct Entity_t {
         explicit Entity_t(uint32_t _w, uint32_t _h) :
             w { _w }, h { _h } {
             sprite.resize(w * h);
         }
-
 
         explicit Entity_t(std::string filename) {
             std::vector<unsigned char> pixels {};
@@ -28,23 +26,15 @@ namespace ECS {
 
             decodePNG(pixels, dw, dh, filevec.data(), filevec.size());
 
-            // sprite = std::vector<uint32_t>{
-            //     pixels.begin(),
-            //     pixels.end()
-            // };
-
-            sprite.resize(pixels.size()/4./);
+            sprite.resize(pixels.size()/4);
             std::memcpy(sprite.data(), pixels.data(),pixels.size());
             w = dw; h = dh;
-
         }
-
-
-
-
 
         uint32_t x { 0 }, y { 0 };
         uint32_t w { 0 }, h { 0 };
+
+        int32_t vx { 1 }, vy { 1 };
         std::vector<uint32_t> sprite {};
 
     };

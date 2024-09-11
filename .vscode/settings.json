@@ -47,6 +47,7 @@
         "typeinfo": "cpp",
         "numbers": "cpp",
         "compare": "cpp",
-        "concepts": "cpp"
+        "concepts": "cpp",
+        "physic cpp": "cpp"
     }
 }
