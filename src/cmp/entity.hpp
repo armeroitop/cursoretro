@@ -19,22 +19,32 @@ namespace ECS {
             unsigned long dw { 0 }, dh { 0 };
             std::ifstream file(filename, std::ios::binary);
 
-            std::vector<unsigned char> filevec{
+            std::vector<unsigned char> filevec {
                 std::istreambuf_iterator<char>{file},
                 std::istreambuf_iterator<char>{}
             };
 
             decodePNG(pixels, dw, dh, filevec.data(), filevec.size());
 
-            sprite.resize(pixels.size()/4);
-            std::memcpy(sprite.data(), pixels.data(),pixels.size());
             w = dw; h = dh;
+
+            //std::memcpy(sprite.data(), pixels.data(), pixels.size());
+            sprite.reserve(pixels.size() / 4);
+            for (auto p = pixels.begin(); p != pixels.end(); p += 4) {
+                uint32_t pixel =
+                    static_cast<uint32_t>(*(p + 0)) << 16
+                    | static_cast<uint32_t>(*(p + 1)) << 8
+                    | static_cast<uint32_t>(*(p + 2)) << 0
+                    | static_cast<uint32_t>(*(p + 3)) << 24;
+                sprite.push_back(pixel);
+            }
+
         }
 
         uint32_t x { 0 }, y { 0 };
         uint32_t w { 0 }, h { 0 };
 
-        int32_t vx { 1 }, vy { 1 };
+        int32_t vx { 1 }, vy { 0 };
         std::vector<uint32_t> sprite {};
 
     };
