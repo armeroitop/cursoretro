@@ -5,7 +5,7 @@
             "name": "(gdb) Launch",  // Nombre de la configuración
             "type": "cppdbg",         // Usa el depurador de C++
             "request": "launch",
-            "program": "/home/david/Proyectos/dramatic/game",  // Ruta al ejecutable que compilas con Makefile
+            "program": "${workspaceFolder}/game",  // Ruta al ejecutable que compilas con Makefile
             "args": [],               // Argumentos que pasas al programa (si es necesario)
             "stopAtEntry": false,     // Cambia a true si quieres que el programa se detenga en main()
             "cwd": "${workspaceFolder}",  // Directorio de trabajo (normalmente el proyecto raíz)
@@ -19,7 +19,7 @@
                     "ignoreFailures": true
                 }
             ],
-            //"preLaunchTask": "make",  // Ejecutar la tarea de compilación con Makefile antes de hacer debug
+            //"preLaunchTask": "${workspaceFolder}/make",  // Ejecutar la tarea de compilación con Makefile antes de hacer debug
             "miDebuggerPath": "/usr/bin/gdb",  // Ruta al depurador GDB
             "logging": {
                 "trace": true,

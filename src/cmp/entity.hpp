@@ -6,6 +6,7 @@
 #include <picoPNG/src/picopng.hpp>
 #include <fstream>
 #include <cstring>
+#include <cmp/physics.hpp>
 
 namespace ECS {
     struct Entity_t {
@@ -41,11 +42,10 @@ namespace ECS {
 
         }
 
-        uint32_t x { 0 }, y { 0 };
         uint32_t w { 0 }, h { 0 };
-
-        int32_t vx { 1 }, vy { 0 };
         std::vector<uint32_t> sprite {};
+
+        PhysicsComponent_t* phy { nullptr };
 
     };
 } // namespace ECS

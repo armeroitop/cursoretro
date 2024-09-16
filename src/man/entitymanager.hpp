@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <iostream>
 #include <vector>
+#include "man/componentstorage.hpp"
 #include "util/typealiases.hpp"
 #include "util/gamecontext.hpp"
 
@@ -23,6 +24,7 @@ namespace ECS {
 
         private:
         VecEntities_t m_Entity {};
+        ComponentStorage_t components {kNUMINITIALENTITIES};
 
     };
 
