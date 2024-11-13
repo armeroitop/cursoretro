@@ -47,7 +47,7 @@ else
 	CC_FLAGS += -O3
 endif
 
-SUB_DIRS		:= $(shell find $(SRC) -type d)
+SUB_DIRS	:= $(shell find $(SRC) -type d)
 OBJSUB_DIRS	:= $(patsubst $(SRC)%,$(OBJ)%,$(SUB_DIRS))
 
 ALL_C		:= $(shell find src/ -type f -iname *.c)

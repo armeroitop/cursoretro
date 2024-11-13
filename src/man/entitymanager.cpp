@@ -1,20 +1,23 @@
 #include "entitymanager.hpp"
+
 #include <algorithm>
+#include <cmp/physics.hpp>
 
 namespace ECS {
-    EntityManager_t::EntityManager_t() {
-        m_Entity.reserve(kNUMINITIALENTITIES);
-    }
 
-    void EntityManager_t::createEntity(uint32_t _x, uint32_t _y, uint32_t _w, uint32_t _h, uint32_t color) {
+EntityManager_t::EntityManager_t() { m_Entity.reserve(kNUMINITIALENTITIES); }
 
-        auto& e = m_Entity.emplace_back("assets/player.png");
-        e.x = _x; e.y = _y;
-        //std::fill(begin(e.sprite), end(e.sprite), color);
+void EntityManager_t::createEntity(uint32_t x, uint32_t y,
+                                   std::string filename) {
+  auto& e = m_Entity.emplace_back(filename);
 
-    }
+  auto& ph = m_components.createPhysicsComponent();
+  e.phy = &ph;
+  ph.x = x;
+  ph.y = y;
 
+  // e.x = _x; e.y = _y;
+  // std::fill(begin(e.sprite), end(e.sprite), color);
+}
 
-} // namespace EC
-
-
+}  // namespace ECS

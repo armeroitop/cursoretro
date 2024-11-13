@@ -21,7 +21,7 @@ int main() {
         ECS::PhysicSystem_t physic;
         ECS::CollisionSystem_t collision;
 
-        EntitiyMan.createEntity(20, 40, 16, 16, 0x0000FFFF);
+        EntitiyMan.createEntity(20, 40, "assets/player.png");
         const ECS::RenderSystem_t Render { 640 , 360 };
 
         while (Render.update(EntitiyMan)) {
