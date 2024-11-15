@@ -2,16 +2,15 @@
 #include <util/gamecontext.hpp>
 
 namespace ECS {
-    bool PhysicSystem_t::update(GameContext_t& g) {
-        for (auto& e : g.getEntities()) {
-            if (e.phy) {
-                e.phy->x += e.phy->vx;
-                e.phy->y += e.phy->vy;
-            }
-        }
-
-        return true;
+bool PhysicSystem_t::update(GameContext_t& g) {
+  for (auto& phy : g.getPhysicsComponents()) {
+    {
+      phy.x += phy.vx;
+      phy.y += phy.vy;
     }
+  }
 
-    
-} // namespace ECS
+  return true;
+}
+
+}  // namespace ECS

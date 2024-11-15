@@ -40,6 +40,7 @@ LIBS_DIR	:= libs
 LIBS 	:= $(LIBS_DIR)/picoPNG/libpicopng.a  $(LIBS_DIR)/tinyPTC/libtinyptc.a -lX11 -lXext 
 INC_DIRS := -I$(SRC) -I$(LIBS_DIR)
 RM 		:= rm
+DEBUG 	:= 1
 
 ifdef DEBUG
 	CC_FLAGS += -g

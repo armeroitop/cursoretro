@@ -21,6 +21,9 @@ struct ComponentStorage_t {
 
   PhysicsComponent_t& createPhysicsComponent();
 
+  const std::vector<PhysicsComponent_t>& getPhysicsComponents() const  { return m_physicsComponent; }
+  std::vector<PhysicsComponent_t>& getPhysicsComponents()  { return m_physicsComponent; }
+
  private:
   std::vector<PhysicsComponent_t> m_physicsComponent{};
 };
