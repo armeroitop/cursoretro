@@ -3,12 +3,13 @@
 #include <cstdint>
 #include <memory>
 #include "util/typealiases.hpp"
+#include "cmp/entity.hpp"
 
 namespace ECS {
 
     //Forward declaration
     struct EntityManager_t; 
-    struct Entity_t;
+    //struct Entity_t;
     struct GameContext_t;
     struct RenderSystem_t {
         explicit RenderSystem_t(uint32_t w, uint32_t h);
@@ -17,7 +18,7 @@ namespace ECS {
 
         bool update(const GameContext_t& g) const;
 
-        void drawAllEntities(const VecEntities_t& entities) const;
+        void drawAllEntities(const Vec_t<Entity_t>& entities) const;
 
         static constexpr uint32_t KR { 0x00FF0000 };
         static constexpr uint32_t KG { 0x0000FF00 };

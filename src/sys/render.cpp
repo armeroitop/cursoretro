@@ -36,7 +36,7 @@ bool RenderSystem_t::update(const GameContext_t& g) const {
     return !ptc_process_events();
 }
 
-void RenderSystem_t::drawAllEntities(const VecEntities_t& entities) const {
+void RenderSystem_t::drawAllEntities(const Vec_t<Entity_t>& entities) const {
 
     auto p_screen = m_framebuffer.get();
 

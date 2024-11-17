@@ -16,8 +16,6 @@ void EntityManager_t::createEntity(uint32_t x, uint32_t y,
   ph.x = x;
   ph.y = y;
 
-  // e.x = _x; e.y = _y;
-  // std::fill(begin(e.sprite), end(e.sprite), color);
 }
 
 }  // namespace ECS
