@@ -12,7 +12,7 @@
 
 namespace ECS {
 struct Entity_t {
-  explicit Entity_t(uint32_t _w, uint32_t _h) : w{_w}, h{_h} {
+  explicit Entity_t(uint32_t w, uint32_t h) : w{w}, h{h} {
     sprite.resize(w * h);
   }
 
@@ -45,7 +45,10 @@ struct Entity_t {
 
   PhysicsComponent_t* phy{nullptr};
 
-  EntityID_t entityID;
+  EntityID_t entityID{++nextID};
+
+ private:
+  static inline EntityID_t nextID{0};
 };
 
 }  // namespace ECS
