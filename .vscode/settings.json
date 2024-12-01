@@ -48,6 +48,9 @@
         "numbers": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
-        "physic cpp": "cpp"
+        "physic cpp": "cpp",
+        "cstring": "cpp",
+        "hash_map": "cpp",
+        "list": "cpp"
     }
 }

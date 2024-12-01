@@ -11,7 +11,7 @@ void EntityManager_t::createEntity(uint32_t x, uint32_t y,
                                    std::string filename) {
   auto& e = m_Entity.emplace_back(filename);
 
-  auto& ph = m_components.createPhysicsComponent();
+  auto& ph = m_components.createPhysicsComponent(e.entityID);
   e.phy = &ph;
   ph.x = x;
   ph.y = y;

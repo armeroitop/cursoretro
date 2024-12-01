@@ -28,7 +28,7 @@ bool RenderSystem_t::update(const GameContext_t& g) const {
     auto p_screen = m_framebuffer.get();
     const auto size = m_w * m_h;
 
-    std::fill(p_screen, p_screen + size, KG);
+    std::fill(p_screen, p_screen + size, KR);
     drawAllEntities(g.getEntities());
 
     ptc_update(p_screen);

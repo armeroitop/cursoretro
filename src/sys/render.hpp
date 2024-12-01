@@ -21,15 +21,6 @@ namespace ECS {
         void drawAllEntities(const Vec_t<Entity_t>& entities) const;
 
         static constexpr uint32_t KR { 0x00FF0000 };
-        static constexpr uint32_t KG { 0x0000FF00 };
-        static constexpr uint32_t KB { 0x000000FF };
-
-        static constexpr uint32_t sprite[8 * 8] = {
-            KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG,
-            KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG,
-            KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG,
-            KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG, KG };
-
 
         private:
         const uint32_t m_w { 0 }, m_h { 0 };

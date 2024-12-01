@@ -1,6 +1,8 @@
 #pragma once
-#include <cmp/physics.hpp>
 #include <vector>
+
+#include "cmp/physics.hpp"
+#include "util/typealiases.hpp"
 
 namespace ECS {
 struct ComponentStorage_t {
@@ -19,10 +21,14 @@ struct ComponentStorage_t {
   ComponentStorage_t operator=(const ComponentStorage_t&) = delete;
   ComponentStorage_t operator=(ComponentStorage_t&&) = delete;
 
-  PhysicsComponent_t& createPhysicsComponent();
+  PhysicsComponent_t& createPhysicsComponent(EntityID_t eid);
 
-  const std::vector<PhysicsComponent_t>& getPhysicsComponents() const  { return m_physicsComponent; }
-  std::vector<PhysicsComponent_t>& getPhysicsComponents()  { return m_physicsComponent; }
+  const std::vector<PhysicsComponent_t>& getPhysicsComponents() const {
+    return m_physicsComponent;
+  }
+  std::vector<PhysicsComponent_t>& getPhysicsComponents() {
+    return m_physicsComponent;
+  }
 
  private:
   std::vector<PhysicsComponent_t> m_physicsComponent{};
